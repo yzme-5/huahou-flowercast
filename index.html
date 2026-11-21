@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173f35">
+  <meta name="description" content="花候 FlowerCast：面向城市小花园的四季花境配置与低维护推演模型。">
+  <title>花候 FlowerCast｜让花境在对的季节相遇</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="page-grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="花候 FlowerCast 首页">
+      <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+        <path d="M22 38V17M22 24c-6 0-10-3-11-9 6-1 10 2 11 9ZM22 29c6 0 10-3 11-9-6-1-10 2-11 9Z"/>
+        <circle cx="22" cy="10" r="5"/>
+      </svg>
+      <span>
+        <strong>花候</strong>
+        <small>FlowerCast</small>
+      </span>
+    </a>
+    <nav aria-label="主导航">
+      <a href="#studio">花境推演</a>
+      <a href="#method">模型方法</a>
+      <a href="docs/项目说明.md">项目说明</a>
+      <a class="nav-github" href="https://github.com/yzme-5/huahou-flowercast" target="_blank" rel="noreferrer">
+        GitHub <span aria-hidden="true">↗</span>
+      </a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span></span> HORTICULTURE × COMPUTATIONAL DESIGN</div>
+        <h1>让花境在对的<br><em>季节与位置</em>相遇。</h1>
+        <p class="hero-lead">
+          输入你的城市、光照与养护时间，花候会用可解释的园艺匹配模型，
+          推演一套有季相、有结构、也能被真正照料的小花园方案。
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#studio">开始推演 <span>↓</span></a>
+          <a class="text-link" href="#method">先看它如何计算 <span>→</span></a>
+        </div>
+        <div class="hero-notes" aria-label="项目特点">
+          <span><i>01</i> 24 种园艺材料</span>
+          <span><i>02</i> 12 个月季相</span>
+          <span><i>03</i> 可导出配置单</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="花境季节推演示意">
+        <div class="visual-orbit orbit-one"></div>
+        <div class="visual-orbit orbit-two"></div>
+        <div class="season-disc">
+          <div class="season-disc-center">
+            <span>四时</span>
+            <strong>有景</strong>
+            <small>SEASONAL<br>STRUCTURE</small>
+          </div>
+          <span class="season-label spring">春 · 萌发</span>
+          <span class="season-label summer">夏 · 盛花</span>
+          <span class="season-label autumn">秋 · 穗影</span>
+          <span class="season-label winter">冬 · 骨架</span>
+          <svg class="botanical-sketch" viewBox="0 0 430 430" aria-hidden="true">
+            <path d="M202 330C210 266 208 213 214 148c2-23 13-45 30-66"/>
+            <path d="M211 251c-34-9-54-32-60-68 32 4 53 23 60 68Z"/>
+            <path d="M212 212c31-10 51-31 58-63-30 4-51 23-58 63Z"/>
+            <path d="M216 166c-25-8-42-27-50-54 27 2 45 20 50 54Z"/>
+            <path d="M220 137c22-10 36-27 41-51-24 5-38 21-41 51Z"/>
+            <circle cx="247" cy="70" r="12"/>
+            <circle cx="229" cy="81" r="9"/>
+            <circle cx="261" cy="84" r="8"/>
+            <path d="M184 328c-17-30-39-46-66-49M184 328c22-26 47-38 75-37"/>
+          </svg>
+        </div>
+        <div class="floating-note note-a">
+          <small>ECOLOGY INDEX</small>
+          <strong>86<sup>/100</sup></strong>
+          <span>传粉与低水协同</span>
+        </div>
+        <div class="floating-note note-b">
+          <small>BLOOM COVERAGE</small>
+          <strong>9<sup>个月</sup></strong>
+          <span>四季花信连续</span>
+        </div>
+        <p class="visual-caption">不只是“种什么”，<br>而是“何时、何地、如何一起生长”。</p>
+      </div>
+    </section>
+
+    <section class="studio-section" id="studio">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow"><span></span> GARDEN SIMULATOR</div>
+          <h2>为你的场地，推演一座花园</h2>
+        </div>
+        <p>
+          所有结果即时在本地计算。先选择接近现场的条件，
+          再用结果作为苗圃选品、种植放样与养护沟通的起点。
+        </p>
+      </div>
+
+      <div class="studio-grid">
+        <aside class="planner-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="panel-index">01 / 场地输入</span>
+              <h3>告诉我它在哪里</h3>
+            </div>
+            <button class="icon-button" id="resetButton" type="button" title="恢复默认条件" aria-label="恢复默认条件">↺</button>
+          </div>
+
+          <div class="preset-block">
+            <span class="field-label">快速场景</span>
+            <div class="preset-list" id="presetList"></div>
+          </div>
+
+          <form id="siteForm">
+            <div class="field-row">
+              <label class="field">
+                <span class="field-label">城市 / 气候</span>
+                <select id="city" name="city"></select>
+              </label>
+              <label class="field">
+                <span class="field-label">种植面积 <output id="areaOutput">12㎡</output></span>
+                <input id="area" name="area" type="range" min="3" max="80" step="1" value="12">
+              </label>
+            </div>
+
+            <fieldset class="field">
+              <legend class="field-label">场地光照</legend>
+              <div class="segmented" data-name="exposure">
+                <label><input type="radio" name="exposure" value="sun"><span>☀ 全日照</span></label>
+                <label><input type="radio" name="exposure" value="part" checked><span>◐ 半日照</span></label>
+                <label><input type="radio" name="exposure" value="shade"><span>☾ 荫蔽</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field-label">设计优先级</legend>
+              <div class="goal-grid" id="goalGrid"></div>
+            </fieldset>
+
+            <div class="field-row">
+              <label class="field">
+                <span class="field-label">土壤 pH <output id="phOutput">6.6</output></span>
+                <input id="ph" name="ph" type="range" min="4.5" max="8.5" step="0.1" value="6.6">
+              </label>
+              <label class="field">
+                <span class="field-label">土壤水分 <output id="moistureOutput">中等</output></span>
+                <input id="moisture" name="moisture" type="range" min="1" max="3" step="1" value="2">
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field">
+                <span class="field-label">每周养护 <output id="careOutput">3 小时</output></span>
+                <input id="careHours" name="careHours" type="range" min="0.5" max="12" step="0.5" value="3">
+              </label>
+              <label class="field">
+                <span class="field-label">预算 <output id="budgetOutput">¥180/㎡</output></span>
+                <input id="budget" name="budget" type="range" min="60" max="320" step="10" value="180">
+              </label>
+            </div>
+
+            <label class="field">
+              <span class="field-label">风格倾向</span>
+              <select id="style" name="style">
+                <option value="natural">自然式 · 松弛与动势</option>
+                <option value="structured">结构式 · 清晰与秩序</option>
+                <option value="cottage">村舍式 · 丰盛与色彩</option>
+              </select>
+            </label>
+
+            <button class="button button-dark generate-button" type="submit">
+              生成花境推演 <span>→</span>
+            </button>
+            <p class="privacy-note">模型在浏览器本地运行，不会上传你的场地数据。</p>
+          </form>
+        </aside>
+
+        <div class="results-panel" id="results" aria-live="polite">
+          <div class="results-placeholder">正在读取园艺数据库…</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="method-section" id="method">
+      <div class="method-intro">
+        <div class="eyebrow"><span></span> TRANSPARENT BY DESIGN</div>
+        <h2>不是一个黑箱推荐。</h2>
+        <p>
+          花候把园艺经验拆成可检查的评分维度，让每个入选理由都可以被追问，
+          也提醒你哪些判断仍需回到现场验证。
+        </p>
+        <a class="text-link" href="docs/模型说明.md">查看完整模型说明 <span>→</span></a>
+      </div>
+      <div class="method-card">
+        <div class="method-card-head">
+          <span>匹配模型 / v1.0</span>
+          <span>解释性权重</span>
+        </div>
+        <div class="weight-row">
+          <span>光照适配</span><div><i style="--w:25%"></i></div><strong>25%</strong>
+        </div>
+        <div class="weight-row">
+          <span>气候耐性</span><div><i style="--w:20%"></i></div><strong>20%</strong>
+        </div>
+        <div class="weight-row">
+          <span>设计目标</span><div><i style="--w:16%"></i></div><strong>16%</strong>
+        </div>
+        <div class="weight-row">
+          <span>养护能力</span><div><i style="--w:15%"></i></div><strong>15%</strong>
+        </div>
+        <div class="weight-row">
+          <span>土壤 pH</span><div><i style="--w:12%"></i></div><strong>12%</strong>
+        </div>
+        <div class="weight-row">
+          <span>土壤水分</span><div><i style="--w:12%"></i></div><strong>12%</strong>
+        </div>
+        <div class="formula">
+          <span>季相选择附加规则</span>
+          <code>候选得分 + 新花期增益 + 形态多样性</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="boundary-section">
+      <div class="boundary-number">24</div>
+      <div>
+        <span class="panel-index">当前植物库</span>
+        <p>覆盖宿根花卉、观赏草、球根与观叶材料。数据用于课程原型与方案推演。</p>
+      </div>
+      <div class="boundary-rule"></div>
+      <div>
+        <span class="panel-index">重要边界</span>
+        <p>气候分区、耐寒性与栽培参数仍需结合具体品种、微气候和当地苗圃材料复核，不替代田间勘察。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+        <path d="M22 38V17M22 24c-6 0-10-3-11-9 6-1 10 2 11 9ZM22 29c6 0 10-3 11-9-6-1-10 2-11 9Z"/>
+        <circle cx="22" cy="10" r="5"/>
+      </svg>
+      <span><strong>花候</strong><small>FlowerCast</small></span>
+    </a>
+    <p>园艺创新创业课程实践作品 · 2026</p>
+    <div>
+      <a href="docs/项目说明.md">项目说明</a>
+      <a href="docs/模型说明.md">模型说明</a>
+      <a href="LICENSE">MIT License</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>

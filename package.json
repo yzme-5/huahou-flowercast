@@ -1,0 +1,18 @@
+{
+  "name": "huahou-flowercast",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "花候 FlowerCast：城市花境四季配置与低维护推演模型",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "test": "node tests/model.test.mjs"
+  },
+  "keywords": [
+    "horticulture",
+    "garden-design",
+    "planting-design",
+    "decision-model"
+  ],
+  "license": "MIT"
+}
